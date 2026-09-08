@@ -22,14 +22,14 @@ enum AlarmTone {
 
   static AlarmTone fromName(String? name) => AlarmTone.values.firstWhere(
         (t) => t.name == name,
-        orElse: () => AlarmTone.analogBell,
+        orElse: () => AlarmTone.digitalBeep,
       );
 }
 
 class AppSettings {
   const AppSettings({
     this.themeMode = ThemeMode.system,
-    this.alarmTone = AlarmTone.analogBell,
+    this.alarmTone = AlarmTone.digitalBeep,
     this.alarmVolume = 0.8,
     this.soundEnabled = true,
     this.vibrationEnabled = true,

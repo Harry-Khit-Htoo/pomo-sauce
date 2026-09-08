@@ -342,9 +342,9 @@ because Android notification channels take their sound from a raw resource):
 
 | File | Sound |
 |---|---|
-| `analog_bell.wav` | **Default.** A soft analog alarm-clock "cling cling cling" — three inharmonic bell strikes per 1.5 s loop, with a clapper transient and a gentle low-pass so it reads mechanical rather than shrill. |
+| `analog_bell.wav` | A soft analog alarm-clock "cling cling cling" — three inharmonic bell strikes per 1.5 s loop, with a clapper transient and a gentle low-pass so it reads mechanical rather than shrill. |
 | `soft_chime.wav` | A warm descending two-note chime. |
-| `digital_beep.wav` | A short, dry electronic triple-beep. |
+| `digital_beep.wav` | **Default.** A short, dry electronic triple-beep. |
 
 **Images** (`assets/branding/`):
 
