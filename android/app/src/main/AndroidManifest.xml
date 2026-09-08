@@ -1,0 +1,140 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        Tomato Focus declares only what a reliable timer actually needs.
+        Every entry here is explained to the user in Settings > Permissions
+        and in README.md, so the Play Console declarations match what ships.
+    -->
+    <!-- Post the completion alert and the running-timer notification.
+         Runtime-requested on Android 13+, contextually, at first start. -->
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Fire the completion alert at the exact second the interval ends.
+         Deliberately SCHEDULE_EXACT_ALARM and not USE_EXACT_ALARM: the
+         latter is reserved for alarm-clock and calendar category apps under
+         current Play policy, and a Pomodoro timer does not qualify. The app
+         degrades to an inexact alarm if the user declines. -->
+    <uses-permission
+        android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <!-- Keep the countdown running and visible while the app is backgrounded. -->
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+    <!-- Hold the screen awake while the focus display is open, if the user
+         has enabled "Keep screen on". Released as soon as it is not. -->
+    <uses-permission
+        android:name="android.permission.WAKE_LOCK"/>
+    <!-- Vibrate on interval completion. Can be switched off in Settings. -->
+    <uses-permission
+        android:name="android.permission.VIBRATE"/>
+    <!-- Re-arm a pending completion alert after a reboot, so a session
+         started before the restart still alerts the user. -->
+    <uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- Optional, user-initiated only from Settings > Permissions: lets the
+         user exempt the timer from aggressive battery optimisation. -->
+    <uses-permission
+        android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <!-- Silence the phone for the length of a focus session, and only that.
+         A restricted permission: it is granted by the user on a system
+         settings screen, always after the in-app explainer, is used solely to
+         enter priority mode while a session runs, and is reverted to the
+         user's own mode the moment the session ends. The completion alarm
+         stays audible via a bypassDnd notification channel rather than by
+         weakening the filter. Declared in Play Console alongside the
+         exact-alarm and foreground-service justifications. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <application
+        android:label="Tomato Focus"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!--
+            The running-timer foreground service.
+
+            foregroundServiceType="specialUse" is the honest classification:
+            a user-facing countdown is not media playback, location or data
+            sync. Android 14+ additionally requires the subtype property
+            below, and Play Console > App content > Foreground service
+            permissions must carry a matching justification.
+
+            Do not rename: the class belongs to flutter_foreground_task.
+        -->
+        <service
+            android:name="com.pravera.flutter_foreground_task.service.ForegroundService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="pomodoro_timer: keeps a user-started focus timer counting and shows its live countdown while the app is not in the foreground. The timer is the core function of the app and is always started by an explicit user action."/>
+        </service>
+        <!-- flutter_local_notifications: delivers scheduled interval alerts
+             and re-arms them after a reboot or an app update. -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+            android:exported="false"/>
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+            android:exported="false"/>
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action
+                    android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action
+                    android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action
+                    android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+        <!-- Monochrome status-bar icon used by the foreground service
+             notification (referenced from Dart as NotificationIcon). -->
+        <meta-data
+            android:name="app.tomatofocus.TIMER_ICON"
+            android:resource="@drawable/ic_notification"/>
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2"/>
+    </application>
+    <queries>
+        <intent>
+            <action
+                android:name="android.intent.action.PROCESS_TEXT"/>
+            <data
+                android:mimeType="text/plain"/>
+        </intent>
+        <!-- Opening the privacy policy and the support mail link. -->
+        <intent>
+            <action
+                android:name="android.intent.action.VIEW"/>
+            <data
+                android:scheme="https"/>
+        </intent>
+        <intent>
+            <action
+                android:name="android.intent.action.SENDTO"/>
+            <data
+                android:scheme="mailto"/>
+        </intent>
+    </queries>
+</manifest>

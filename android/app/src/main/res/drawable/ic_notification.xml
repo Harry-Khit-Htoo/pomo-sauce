@@ -1,0 +1,33 @@
+<!--
+    Status-bar icon. Android renders notification small icons as a silhouette,
+    so this is a solid white tomato shape with the face knocked out - anything
+    with colour or gradients would come out as a white blob.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFFFF">
+
+    <!-- calyx -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M12,2.2 L12.9,4.6 L15.6,3.9 L14.3,6.2 L16.6,7.0 L12,7.6 L7.4,7.0 L9.7,6.2 L8.4,3.9 L11.1,4.6 Z" />
+
+    <!-- body -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M12,7.4 C16.4,7.4 20,10.6 20,14.9 C20,18.6 16.4,21.6 12,21.6 C7.6,21.6 4,18.6 4,14.9 C4,10.6 7.6,7.4 12,7.4 Z" />
+
+    <!-- eyes and mouth, knocked out of the body -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M9.4,12.6 m-1.35,0 a1.35,1.55 0 1,0 2.7,0 a1.35,1.55 0 1,0 -2.7,0 Z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M14.6,12.6 m-1.35,0 a1.35,1.55 0 1,0 2.7,0 a1.35,1.55 0 1,0 -2.7,0 Z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M9.0,16.4 C10.0,18.4 14.0,18.4 15.0,16.4 Z" />
+</vector>

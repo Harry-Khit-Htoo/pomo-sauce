@@ -1,0 +1,16 @@
+# Copy to android/key.properties and fill in. That file is git-ignored and
+# must never be committed.
+#
+# Create the keystore first (once, ever):
+#
+#   keytool -genkey -v -keystore ~/tomato-focus.jks -keyalg RSA \
+#     -keysize 2048 -validity 10000 -alias tomato
+#
+# BACK THE .jks FILE UP. If you lose it you can never publish an update to
+# this app again - Play identifies the app by this key, and there is no
+# recovery path short of shipping a brand new listing.
+
+storeFile=../../tomato-focus.jks
+storePassword=CHANGE_ME
+keyAlias=tomato
+keyPassword=CHANGE_ME

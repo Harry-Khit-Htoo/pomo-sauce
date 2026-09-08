@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The alarm tones are only ever referenced by name from Dart
+    (RawResourceAndroidNotificationSound('analog_bell')), so R8's resource
+    shrinker cannot see any reference to them and strips them from the release
+    build. The channel is still created with a valid-looking URI, but
+    zonedSchedule then fails with "invalid_sound" and the alarm never fires -
+    a bug that only appears in release builds. Keep them explicitly.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/analog_bell,@raw/soft_chime,@raw/digital_beep" />
