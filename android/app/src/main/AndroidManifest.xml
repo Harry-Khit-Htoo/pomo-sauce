@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!--
-        Tomato Focus declares only what a reliable timer actually needs.
+        Pomo Sauce declares only what a reliable timer actually needs.
         Every entry here is explained to the user in Settings > Permissions
         and in README.md, so the Play Console declarations match what ships.
     -->
@@ -46,7 +46,7 @@
     <uses-permission
         android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
     <application
-        android:label="Tomato Focus"
+        android:label="Pomo Sauce"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -110,7 +110,7 @@
         <!-- Monochrome status-bar icon used by the foreground service
              notification (referenced from Dart as NotificationIcon). -->
         <meta-data
-            android:name="app.tomatofocus.TIMER_ICON"
+            android:name="app.pomosauce.TIMER_ICON"
             android:resource="@drawable/ic_notification"/>
         <meta-data
             android:name="flutterEmbedding"

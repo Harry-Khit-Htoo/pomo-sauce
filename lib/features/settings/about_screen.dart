@@ -64,7 +64,7 @@ class AboutScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Tomato Focus has no accounts, no analytics and no ads. '
+                  'Pomo Sauce has no accounts, no analytics and no ads. '
                   'Your sessions, habits and settings are stored only in this '
                   'app on this device, and are deleted when you uninstall it.',
                   style: context.texts.bodyMedium

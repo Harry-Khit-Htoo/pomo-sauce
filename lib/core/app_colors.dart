@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// The Tomato Focus palette.
+/// The Pomo Sauce palette.
 ///
 /// Tomato red is the brand. There is deliberately no blue anywhere in the
 /// app: the two break phases take green (borrowed from the mascot's calyx)

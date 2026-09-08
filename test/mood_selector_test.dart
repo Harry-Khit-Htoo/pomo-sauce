@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tomato_focus/data/habit_repository.dart';
-import 'package:tomato_focus/data/models/habit.dart';
-import 'package:tomato_focus/data/models/pomodoro_phase.dart';
-import 'package:tomato_focus/data/models/timer_preset.dart';
-import 'package:tomato_focus/mascot/mascot_mood.dart';
-import 'package:tomato_focus/mascot/mood_selector.dart';
-import 'package:tomato_focus/timer/pomodoro_state.dart';
+import 'package:pomo_sauce/data/habit_repository.dart';
+import 'package:pomo_sauce/data/models/habit.dart';
+import 'package:pomo_sauce/data/models/pomodoro_phase.dart';
+import 'package:pomo_sauce/data/models/timer_preset.dart';
+import 'package:pomo_sauce/mascot/mascot_mood.dart';
+import 'package:pomo_sauce/mascot/mood_selector.dart';
+import 'package:pomo_sauce/timer/pomodoro_state.dart';
 
 HabitProgress _habit({
   bool doneToday = false,

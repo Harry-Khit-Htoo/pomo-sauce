@@ -1,14 +1,14 @@
-# Privacy Policy — Tomato Focus
+# Privacy Policy — Pomo Sauce
 
 **Last updated: 6 September 2026**
 
-Tomato Focus is a Pomodoro timer and habit tracker. This policy explains what
+Pomo Sauce is a Pomodoro timer and habit tracker. This policy explains what
 the app does and does not do with your information. It is short because the
 app does very little.
 
 ## The short version
 
-Tomato Focus does not collect, transmit, or share any personal data. There are
+Pomo Sauce does not collect, transmit, or share any personal data. There are
 no accounts, no servers, no analytics, and no advertising. Everything you enter
 stays on your device.
 
@@ -77,7 +77,7 @@ cannot recover it for you.
 
 ## Children
 
-Tomato Focus is a general-audience productivity app. It is not directed at
+Pomo Sauce is a general-audience productivity app. It is not directed at
 children, and it collects no data from anyone, including children.
 
 ## Security
@@ -101,7 +101,7 @@ Questions about this policy: **aungkhit.pentester@gmail.com**
 
 ---
 
-*Published at <https://harry-khit-htoo.github.io/tomato-focus-privacy/> from
-the `tomato-focus-privacy` repository. This file is the source of truth for
+*Published at <https://harry-khit-htoo.github.io/pomo-sauce-privacy/> from
+the `pomo-sauce-privacy` repository. This file is the source of truth for
 the wording; if you change it, update that repository's `index.html` and the
 Play Console Data safety declaration to match.*

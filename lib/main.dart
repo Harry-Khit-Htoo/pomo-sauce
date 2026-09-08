@@ -49,7 +49,7 @@ Future<void> main() async {
           ),
         ),
       ],
-      child: const TomatoFocusApp(),
+      child: const PomoSauceApp(),
     ),
   );
 }

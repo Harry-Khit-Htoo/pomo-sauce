@@ -45,7 +45,7 @@ class NotificationService {
     } catch (e) {
       // Falls back to UTC; scheduling still works because every fire time is
       // converted from an absolute DateTime.
-      debugPrint('Tomato Focus: could not resolve local time zone ($e)');
+      debugPrint('Pomo Sauce: could not resolve local time zone ($e)');
     }
 
     final plugin = FlutterLocalNotificationsPlugin();
@@ -131,7 +131,7 @@ class NotificationService {
         id,
         sound ? 'Timer alerts - ${tone.label}' : 'Timer alerts - silent',
         description:
-            'Fires when a focus session or break finishes. Tomato Focus is '
+            'Fires when a focus session or break finishes. Pomo Sauce is '
             'unusable without it.',
         importance: Importance.max,
         playSound: sound,
@@ -242,7 +242,7 @@ class NotificationService {
         // Most likely the exact-alarm permission was revoked between the
         // check above and this call. Retry once inexactly rather than losing
         // the alert entirely.
-        debugPrint('Tomato Focus: exact schedule failed ($e), falling back');
+        debugPrint('Pomo Sauce: exact schedule failed ($e), falling back');
         try {
           await _plugin.zonedSchedule(
             id: AppConstants.alarmNotificationBaseId + index,
@@ -257,7 +257,7 @@ class NotificationService {
         } catch (e2) {
           // Out of our hands - the in-app alarm and the foreground-service
           // notification still cover the user while the app is alive.
-          debugPrint('Tomato Focus: could not schedule alert at all ($e2)');
+          debugPrint('Pomo Sauce: could not schedule alert at all ($e2)');
         }
       }
     }
@@ -276,7 +276,7 @@ class NotificationService {
         pending.add(request.id);
       }
     } catch (e) {
-      debugPrint('Tomato Focus: could not read pending notifications ($e)');
+      debugPrint('Pomo Sauce: could not read pending notifications ($e)');
       return;
     }
     for (var i = 0; i < AppConstants.maxScheduledChainLength; i++) {

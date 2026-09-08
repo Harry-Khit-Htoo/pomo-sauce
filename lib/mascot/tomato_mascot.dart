@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../core/app_colors.dart';
 import 'mascot_mood.dart';
 
-/// The Tomato Focus mascot, built to `docs/mascot-style-guide.md`.
+/// The Pomo Sauce mascot, built to `docs/mascot-style-guide.md`.
 ///
 /// One rig, one base model: near-spherical clay-render body, curved stem with
 /// five veined calyx leaves, thin-rimmed glossy eyes, soft blush, and dark

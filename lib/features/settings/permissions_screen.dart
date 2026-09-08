@@ -66,7 +66,7 @@ class PermissionsScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
         children: [
           Text(
-            'Tomato Focus asks for the smallest set of permissions that lets '
+            'Pomo Sauce asks for the smallest set of permissions that lets '
             'a timer be genuinely reliable. It requests no location, no '
             'contacts, no camera and no network access.',
             style: context.texts.bodyMedium

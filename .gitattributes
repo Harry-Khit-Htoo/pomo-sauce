@@ -1,0 +1,17 @@
+# Normalise line endings so the repo is byte-identical across Windows, macOS
+# and Linux. Without this, Git's autocrlf conversion produces whole-file diffs
+# whenever the platform changes, and tooling that writes LF (the asset and
+# patch scripts in tool/) fights the working-tree conversion on every run.
+* text=auto eol=lf
+
+# Binary assets: never touch these.
+*.png binary
+*.jpg binary
+*.wav binary
+*.jks binary
+*.keystore binary
+*.ttf binary
+*.otf binary
+
+# Shell scripts must keep LF or they will not run.
+*.sh text eol=lf

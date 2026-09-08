@@ -8,7 +8,7 @@ class AppDatabase {
 
   final Database db;
 
-  static const _fileName = 'tomato_focus.db';
+  static const _fileName = 'pomo_sauce.db';
   static const _version = 1;
 
   static Future<AppDatabase> open() async {

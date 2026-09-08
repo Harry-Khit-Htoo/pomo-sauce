@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tomato_focus/core/formatting.dart';
-import 'package:tomato_focus/data/models/pomodoro_phase.dart';
-import 'package:tomato_focus/data/models/timer_preset.dart';
-import 'package:tomato_focus/timer/pomodoro_state.dart';
+import 'package:pomo_sauce/core/formatting.dart';
+import 'package:pomo_sauce/data/models/pomodoro_phase.dart';
+import 'package:pomo_sauce/data/models/timer_preset.dart';
+import 'package:pomo_sauce/timer/pomodoro_state.dart';
 
 void main() {
   group('countdown formatting', () {

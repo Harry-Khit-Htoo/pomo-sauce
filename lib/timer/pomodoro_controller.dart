@@ -150,7 +150,7 @@ class PomodoroController extends Notifier<PomodoroState> {
     try {
       return PomodoroStateJson.fromJson(json);
     } catch (e) {
-      debugPrint('Tomato Focus: could not restore timer state ($e)');
+      debugPrint('Pomo Sauce: could not restore timer state ($e)');
       return fallback;
     }
   }
@@ -486,7 +486,7 @@ class PomodoroController extends Notifier<PomodoroState> {
     try {
       await step();
     } catch (e) {
-      debugPrint('Tomato Focus: $label failed ($e)');
+      debugPrint('Pomo Sauce: $label failed ($e)');
     }
   }
 
@@ -592,7 +592,7 @@ class PomodoroController extends Notifier<PomodoroState> {
       final held = await WakelockPlus.enabled;
       if (shouldHold != held) await WakelockPlus.toggle(enable: shouldHold);
     } catch (e) {
-      debugPrint('Tomato Focus: wakelock unavailable ($e)');
+      debugPrint('Pomo Sauce: wakelock unavailable ($e)');
     }
   }
 

@@ -1,4 +1,4 @@
-package com.tomatofocus.tomato_focus
+package com.pomosauce.app
 
 import android.app.AlarmManager
 import android.content.BroadcastReceiver
@@ -27,8 +27,8 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity : FlutterActivity() {
 
     private companion object {
-        const val METHOD_CHANNEL = "app.tomatofocus/exact_alarm"
-        const val EVENT_CHANNEL = "app.tomatofocus/exact_alarm_events"
+        const val METHOD_CHANNEL = "app.pomosauce/exact_alarm"
+        const val EVENT_CHANNEL = "app.pomosauce/exact_alarm_events"
     }
 
     private var permissionReceiver: BroadcastReceiver? = null

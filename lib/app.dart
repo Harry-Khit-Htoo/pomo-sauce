@@ -8,8 +8,8 @@ import 'features/onboarding/onboarding_screen.dart';
 import 'features/shell/root_shell.dart';
 import 'providers.dart';
 
-class TomatoFocusApp extends ConsumerWidget {
-  const TomatoFocusApp({super.key});
+class PomoSauceApp extends ConsumerWidget {
+  const PomoSauceApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

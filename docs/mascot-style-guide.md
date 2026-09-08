@@ -1,4 +1,4 @@
-# Tomato Focus — Mascot Visual Style Guide
+# Pomo Sauce — Mascot Visual Style Guide
 
 The brief for anyone producing final art or animation for the mascot: an
 illustrator, a Rive author, or an AI image tool generating individual poses.
@@ -153,9 +153,16 @@ Adding a mood means adding an enum value and one `_Motion` entry — no new
 drawing code, and nothing else in the app changes.
 
 ### Keeping the launcher icon on-model
-`tool/generate_assets.py` draws the same base model for the launcher icon,
-splash and feature graphic. If the base model changes here, change it there
-too and re-run:
+The launcher icon, splash and feature graphic are **not** drawn from this
+model any more: they are composited from the render at
+`assets/branding/source/mascot_render.jpg`, which is the same character with
+proper 3D shading. `draw_tomato()` in `tool/generate_assets.py` stays as the
+vector reference the in-app `CustomPainter` is written against — the two must
+still agree on proportion, palette and expression, so that the mascot on the
+focus screen reads as the same character as the icon on the home screen.
+
+If the base model changes here, update `draw_tomato()`, re-render the source
+art to match, and re-run:
 
 ```bash
 python tool/generate_assets.py

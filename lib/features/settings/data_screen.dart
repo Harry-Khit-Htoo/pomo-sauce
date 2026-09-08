@@ -37,7 +37,7 @@ class _DataScreenState extends ConsumerState<DataScreen> {
       }
     }
     return {
-      'app': 'Tomato Focus',
+      'app': 'Pomo Sauce',
       'exported_at': DateTime.now().toIso8601String(),
       'schema_version': 1,
       'habits': habits.map((h) => h.toRow()).toList(),
@@ -53,13 +53,13 @@ class _DataScreenState extends ConsumerState<DataScreen> {
       final json = const JsonEncoder.withIndent('  ').convert(await _buildExport());
       final dir = await getTemporaryDirectory();
       final file = File(
-        p.join(dir.path, 'tomato-focus-${DayKey.today()}.json'),
+        p.join(dir.path, 'pomo-sauce-${DayKey.today()}.json'),
       );
       await file.writeAsString(json);
       await SharePlus.instance.share(
         ShareParams(
           files: [XFile(file.path)],
-          text: 'Tomato Focus data export',
+          text: 'Pomo Sauce data export',
         ),
       );
     } catch (e) {

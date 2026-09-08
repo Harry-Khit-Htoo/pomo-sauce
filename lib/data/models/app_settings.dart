@@ -18,7 +18,7 @@ enum AlarmTone {
 
   /// Each tone needs its own notification channel: Android bakes the sound
   /// into the channel at creation time and will not change it afterwards.
-  String get channelId => 'tomato_focus_alarm_$rawResource';
+  String get channelId => 'pomo_sauce_alarm_$rawResource';
 
   static AlarmTone fromName(String? name) => AlarmTone.values.firstWhere(
         (t) => t.name == name,

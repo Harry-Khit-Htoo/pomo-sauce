@@ -56,3 +56,8 @@ app.*.map.json
 /android/app/build/
 /android/.gradle/
 /android/.cxx/
+
+# The original artwork download, kept at the repo root by accident. The file
+# that matters is assets/branding/source/mascot_render.jpg, which is the same
+# image and is tracked. Safe to delete this one.
+/Habit Tracker - Focus Timer.jpg

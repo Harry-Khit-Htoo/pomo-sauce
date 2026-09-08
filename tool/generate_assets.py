@@ -1,5 +1,5 @@
 """
-Tomato Focus - asset generator.
+Pomo Sauce - asset generator.
 
 Produces, with no third-party audio deps:
   * assets/sounds/*.wav        alarm tones played in-app (audioplayers)
@@ -208,6 +208,8 @@ def build_sounds():
 
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
+import brand_source  # noqa: E402
+
 SS = 4  # supersample factor - draw big, downscale with LANCZOS for clean edges
 
 # Sampled from the mascot reference sheet: ripe tomato red, leaf green, and a
@@ -235,6 +237,20 @@ def load_font(px):
             except OSError:
                 continue
     return ImageFont.load_default()
+
+
+def fit_font(text, max_px, start):
+    """Largest font <= `start` whose `text` fits in `max_px`.
+
+    load_font() takes whatever face the machine has, and metrics differ enough
+    between them to overflow a fixed size, so measure instead of assuming.
+    """
+    probe = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    for px in range(start, 11, -2):
+        font = load_font(px)
+        if probe.textbbox((0, 0), text, font=font)[2] <= max_px:
+            return font
+    return load_font(12)
 
 
 def vertical_gradient(size, top, bottom):
@@ -363,55 +379,83 @@ def draw_tomato(size, scale=1.0, offset=(0.0, 0.0), transparent=True, bg=None):
 
 
 def build_images():
+    """Composite every branding PNG from the source render.
+
+    The mascot and wordmark are cut out of `assets/branding/source/` rather
+    than drawn: `draw_tomato` above stays as the vector reference model that
+    `docs/mascot-style-guide.md` and the in-app painter are written against.
+    """
     os.makedirs(BRAND, exist_ok=True)
-    print("branding:")
+    mascot, wordmark = brand_source.load()
+    print("branding: from %s" % os.path.relpath(brand_source.SOURCE, ROOT))
 
     def save(img, name):
         path = os.path.join(BRAND, name)
         img.save(path, "PNG")
         print("  png  %-30s %6.1f KB  %s" % (name, os.path.getsize(path) / 1024, img.size))
 
+    def icon(size, height_frac, bg=None):
+        """Square canvas with the mascot centred at `height_frac` of the side."""
+        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        if bg is not None:
+            canvas.paste(vertical_gradient((size, size), *bg).convert("RGBA"), (0, 0))
+        brand_source.paste_centered(
+            canvas, brand_source.fit_height(mascot, round(size * height_frac)), size // 2)
+        return canvas
+
     icon_bg = ((255, 244, 238), (255, 214, 201))
     # Play Store icon: plain 512x512, full bleed, NO text (Play icon spec).
-    save(draw_tomato(512, scale=0.86, transparent=False, bg=icon_bg), "icon_play_512.png")
+    save(icon(512, 0.80, icon_bg), "icon_play_512.png")
     # Source image for flutter_launcher_icons (legacy Android + iOS).
-    save(draw_tomato(1024, scale=0.86, transparent=False, bg=icon_bg), "icon_source_1024.png")
-    # Adaptive foreground: transparent, art kept inside the 66% safe zone.
-    save(draw_tomato(1024, scale=0.60, offset=(0.0, 0.01)), "icon_adaptive_foreground.png")
+    save(icon(1024, 0.80, icon_bg), "icon_source_1024.png")
+    # Adaptive foreground: transparent, and deliberately close to full bleed.
+    # flutter_launcher_icons wraps this drawable in a 16% inset of its own
+    # (see mipmap-anydpi-v26/ic_launcher.xml), which is what puts the art
+    # inside the 66% safe zone - 0.88 here lands at 0.60 of the finished icon,
+    # about 90% of the 72dp circle a launcher actually shows. Authoring to the
+    # safe zone here as well would double up the margin and leave the mascot
+    # marooned in a ring of background.
+    save(icon(1024, 0.88), "icon_adaptive_foreground.png")
+    # Android 12 splash icon. Same art, but this one is NOT inset for us:
+    # the platform masks it to a circle two thirds of the canvas, so the
+    # safe-zone margin has to be baked in here.
+    save(icon(1024, 0.60), "splash_icon_android12.png")
     # Bare mascot, used on the About screen.
-    save(draw_tomato(512, scale=0.94), "mascot.png")
+    save(icon(512, 0.94), "mascot.png")
 
     for label, bgc, fg, sub in (("light", (255, 250, 247), INK, (150, 106, 96)),
                                 ("dark", (20, 17, 16), (247, 235, 232), (176, 138, 130))):
-        # Brand lockup: the mascot with "Productivity" written underneath.
-        # This is the in-app / splash lockup, deliberately not the launcher icon.
+        # Brand lockup: the mascot over the wordmark, on a solid ground.
         W, H = 1080, 1400
         img = Image.new("RGBA", (W, H), bgc + (255,))
-        img.alpha_composite(draw_tomato(880, scale=0.94), ((W - 880) // 2, 150))
+        brand_source.paste_centered(img, brand_source.fit_width(mascot, 880), 620)
+        brand_source.paste_centered(
+            img, brand_source.tint(brand_source.fit_width(wordmark, 620), fg), 1215)
         d = ImageDraw.Draw(img)
-        for text, font, color, y in (("Productivity", load_font(150), fg, 1035),
-                                     ("Tomato Focus", load_font(58), sub, 1215)):
-            w = d.textbbox((0, 0), text, font=font)[2]
-            d.text(((W - w) / 2, y), text, font=font, fill=color)
+        tagline = "Focus. Rest. Repeat."
+        font = fit_font(tagline, W - 160, 54)
+        w = d.textbbox((0, 0), tagline, font=font)[2]
+        d.text(((W - w) / 2, 1300), tagline, font=font, fill=sub)
         save(img, "brand_lockup_%s.png" % label)
 
         # Splash art: same lockup on a transparent ground for flutter_native_splash.
         sp = Image.new("RGBA", (900, 1150), (0, 0, 0, 0))
-        sp.alpha_composite(draw_tomato(760, scale=0.94), (70, 40))
-        sd = ImageDraw.Draw(sp)
-        f = load_font(128)
-        w = sd.textbbox((0, 0), "Productivity", font=f)[2]
-        sd.text(((900 - w) / 2, 800), "Productivity", font=f, fill=fg)
+        brand_source.paste_centered(sp, brand_source.fit_width(mascot, 700), 500)
+        brand_source.paste_centered(
+            sp, brand_source.tint(brand_source.fit_width(wordmark, 520), fg), 965)
         save(sp, "splash_%s.png" % label)
 
-    # Play feature graphic, 1024x500.
+    # Play feature graphic, 1024x500. The listing title is keyword-led
+    # ("Pomo Sauce - Habit Tracker & Focus Timer"); the banner echoes it.
     fgx = Image.new("RGBA", (1024, 500), (0, 0, 0, 0))
     fgx.paste(vertical_gradient((1024, 500), (255, 243, 237), (250, 190, 175)).convert("RGBA"), (0, 0))
-    fgx.alpha_composite(draw_tomato(430, scale=0.94), (66, 34))
+    brand_source.paste_centered(fgx, brand_source.fit_height(mascot, 420), 250, cx=265)
+    col_x, col_w = 520, 1024 - 520 - 48
+    fgx.alpha_composite(brand_source.tint(brand_source.fit_width(wordmark, 420), INK), (col_x, 132))
     d = ImageDraw.Draw(fgx)
-    d.text((520, 160), "Tomato Focus", font=load_font(88), fill=INK)
-    d.text((524, 272), "Pomodoro timer + habit tracker", font=load_font(40), fill=(140, 52, 40))
-    d.text((524, 328), "Focus. Rest. Repeat.", font=load_font(40), fill=(168, 74, 58))
+    for text, y, color in (("Habit Tracker & Focus Timer", 240, (140, 52, 40)),
+                           ("Focus. Rest. Repeat.", 300, (168, 74, 58))):
+        d.text((col_x + 4, y), text, font=fit_font(text, col_w, 40), fill=color)
     save(fgx, "feature_graphic_1024x500.png")
 
 

@@ -20,7 +20,7 @@ import 'package:flutter/services.dart';
 /// `bypassDnd`, not because the filter is weakened - the rest of the phone
 /// stays properly quiet.
 abstract final class DndService {
-  static const _channel = MethodChannel('app.tomatofocus/dnd');
+  static const _channel = MethodChannel('app.pomosauce/dnd');
 
   static bool get isSupported => Platform.isAndroid;
 
@@ -30,7 +30,7 @@ abstract final class DndService {
     try {
       return await _channel.invokeMethod<bool>('isPolicyAccessGranted') ?? false;
     } on PlatformException catch (e) {
-      debugPrint('Tomato Focus: DND access check failed ($e)');
+      debugPrint('Pomo Sauce: DND access check failed ($e)');
       return false;
     }
   }
@@ -42,7 +42,7 @@ abstract final class DndService {
     try {
       await _channel.invokeMethod<void>('openPolicyAccessSettings');
     } on PlatformException catch (e) {
-      debugPrint('Tomato Focus: could not open DND settings ($e)');
+      debugPrint('Pomo Sauce: could not open DND settings ($e)');
     }
   }
 
@@ -53,7 +53,7 @@ abstract final class DndService {
     try {
       return await _channel.invokeMethod<bool>('enable') ?? false;
     } on PlatformException catch (e) {
-      debugPrint('Tomato Focus: could not enable DND ($e)');
+      debugPrint('Pomo Sauce: could not enable DND ($e)');
       return false;
     }
   }
@@ -64,7 +64,7 @@ abstract final class DndService {
     try {
       return await _channel.invokeMethod<bool>('restore') ?? false;
     } on PlatformException catch (e) {
-      debugPrint('Tomato Focus: could not restore DND ($e)');
+      debugPrint('Pomo Sauce: could not restore DND ($e)');
       return false;
     }
   }
@@ -77,7 +77,7 @@ abstract final class DndService {
     try {
       return await _channel.invokeMethod<bool>('reconcile') ?? false;
     } on PlatformException catch (e) {
-      debugPrint('Tomato Focus: DND reconcile failed ($e)');
+      debugPrint('Pomo Sauce: DND reconcile failed ($e)');
       return false;
     }
   }

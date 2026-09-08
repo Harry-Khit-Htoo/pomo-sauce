@@ -51,7 +51,7 @@ class _TimerTaskHandler extends TaskHandler {
       _ => state.phase.label,
     };
     final text = state.status == TimerStatus.ringing
-        ? 'Tap to open Tomato Focus'
+        ? 'Tap to open Pomo Sauce'
         : '${formatCountdown(remaining)} remaining';
 
     if (text == _lastText) return;
@@ -72,7 +72,7 @@ class _TimerTaskHandler extends TaskHandler {
         jsonDecode(raw) as Map<String, dynamic>,
       );
     } catch (e) {
-      debugPrint('Tomato Focus service: could not read timer state ($e)');
+      debugPrint('Pomo Sauce service: could not read timer state ($e)');
       return null;
     }
   }
@@ -89,7 +89,7 @@ abstract final class TimerForegroundService {
     _initialised = true;
     FlutterForegroundTask.init(
       androidNotificationOptions: AndroidNotificationOptions(
-        channelId: 'tomato_focus_timer',
+        channelId: 'pomo_sauce_timer',
         channelName: 'Running timer',
         channelDescription:
             'Shows the live countdown while a focus session or break is '
@@ -141,7 +141,7 @@ abstract final class TimerForegroundService {
       callback: startTimerTaskCallback,
     );
     if (result is ServiceRequestFailure) {
-      debugPrint('Tomato Focus: foreground service refused (${result.error})');
+      debugPrint('Pomo Sauce: foreground service refused (${result.error})');
     }
   }
 

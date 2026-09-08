@@ -1,5 +1,5 @@
-name: tomato_focus
-description: "Tomato Focus - a Pomodoro timer and habit tracker with a friendly mascot."
+name: pomo_sauce
+description: "Pomo Sauce - a Pomodoro timer and habit tracker with a friendly mascot."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -110,7 +110,7 @@ flutter:
 # ---------------------------------------------------------------------------
 # Launcher icon. The source art is a plain tomato with no text: Play's icon
 # guidance forbids baked-in wording, and text is unreadable at 48dp anyway.
-# The "Productivity" lockup lives on the splash and About screens instead.
+# The "Pomo Sauce" wordmark lives on the splash and brand lockup instead.
 # Regenerate with:  dart run flutter_launcher_icons
 # ---------------------------------------------------------------------------
 flutter_launcher_icons:
@@ -132,7 +132,7 @@ flutter_native_splash:
   android_12:
     color: "#FFF8F5"
     color_dark: "#141110"
-    image: "assets/branding/icon_adaptive_foreground.png"
-    image_dark: "assets/branding/icon_adaptive_foreground.png"
+    image: "assets/branding/splash_icon_android12.png"
+    image_dark: "assets/branding/splash_icon_android12.png"
   android: true
   ios: true

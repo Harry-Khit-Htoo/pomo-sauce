@@ -16,7 +16,7 @@ class AlarmPlayer {
   bool _ringing = false;
 
   static Future<AlarmPlayer> create() async {
-    final player = AudioPlayer(playerId: 'tomato_focus_alarm');
+    final player = AudioPlayer(playerId: 'pomo_sauce_alarm');
     await player.setReleaseMode(ReleaseMode.loop);
     // The alarm usage flag makes the tone follow the alarm volume slider and
     // sound through Do Not Disturb where the user has allowed alarms.
@@ -53,7 +53,7 @@ class AlarmPlayer {
         await _player.setVolume(volume.clamp(0.0, 1.0));
         await _player.play(AssetSource(tone.assetPath));
       } catch (e) {
-        debugPrint('Tomato Focus: alarm playback failed ($e)');
+        debugPrint('Pomo Sauce: alarm playback failed ($e)');
       }
     }
     if (vibration) {
@@ -65,7 +65,7 @@ class AlarmPlayer {
           );
         }
       } catch (e) {
-        debugPrint('Tomato Focus: vibration failed ($e)');
+        debugPrint('Pomo Sauce: vibration failed ($e)');
       }
     }
   }
@@ -84,13 +84,13 @@ class AlarmPlayer {
   /// Used by the Settings screen so the user can audition a tone.
   Future<void> preview(AlarmTone tone, {double volume = 0.8}) async {
     try {
-      final preview = AudioPlayer(playerId: 'tomato_focus_preview');
+      final preview = AudioPlayer(playerId: 'pomo_sauce_preview');
       await preview.setReleaseMode(ReleaseMode.release);
       await preview.setVolume(volume.clamp(0.0, 1.0));
       await preview.play(AssetSource(tone.assetPath));
       preview.onPlayerComplete.listen((_) => preview.dispose());
     } catch (e) {
-      debugPrint('Tomato Focus: preview failed ($e)');
+      debugPrint('Pomo Sauce: preview failed ($e)');
     }
   }
 

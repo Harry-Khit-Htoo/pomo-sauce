@@ -1,4 +1,4 @@
-package com.tomatofocus.tomato_focus
+package com.pomosauce.app
 
 import android.app.NotificationManager
 import android.content.Context
@@ -25,8 +25,8 @@ import io.flutter.plugin.common.MethodChannel
 class DndController(private val context: Context) {
 
     companion object {
-        const val CHANNEL = "app.tomatofocus/dnd"
-        private const val PREFS = "tomato_focus_dnd"
+        const val CHANNEL = "app.pomosauce/dnd"
+        private const val PREFS = "pomo_sauce_dnd"
         private const val KEY_PREVIOUS = "previous_filter"
         private const val NONE = -1
     }

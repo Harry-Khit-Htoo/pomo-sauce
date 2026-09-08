@@ -9,7 +9,7 @@ plugins {
 val hasReleaseKeystore = rootProject.file("key.properties").exists()
 
 android {
-    namespace = "com.tomatofocus.tomato_focus"
+    namespace = "com.pomosauce.app"
 
     // Play requires new apps and updates to target Android 16 (API 36) from
     // September 2026. compileSdk is pinned to the same level so the manifest
@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.tomatofocus.tomato_focus"
+        applicationId = "com.pomosauce.app"
         // flutter_local_notifications and flutter_foreground_task both need 21+;
         // 24 keeps the notification-channel code paths simple.
         minSdk = 24

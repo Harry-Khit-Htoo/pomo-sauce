@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tomato_focus/core/app_colors.dart';
-import 'package:tomato_focus/mascot/mascot_mood.dart';
-import 'package:tomato_focus/mascot/tomato_mascot.dart';
+import 'package:pomo_sauce/core/app_colors.dart';
+import 'package:pomo_sauce/mascot/mascot_mood.dart';
+import 'package:pomo_sauce/mascot/tomato_mascot.dart';
 
 /// Renders every pose to one image so the art can be reviewed against
 /// `docs/mascot-style-guide.md` without running the app.

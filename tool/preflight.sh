@@ -20,7 +20,7 @@ bad()  { printf '  \033[31mFAIL\033[0m  %s\n' "$1"; FAIL=$((FAIL + 1)); }
 note() { printf '        %s\n' "$1"; }
 
 echo
-echo "Tomato Focus - Play upload preflight"
+echo "Pomo Sauce - Play upload preflight"
 echo "===================================="
 echo
 
@@ -43,9 +43,9 @@ fi
 # --- 2. placeholders ----------------------------------------------------
 echo
 echo "Store metadata in the app"
-if grep -q "tomatofocus.app" lib/core/constants.dart 2>/dev/null; then
+if grep -qE "example\.com|CHANGE_ME|placeholder" lib/core/constants.dart 2>/dev/null; then
   bad "placeholder URLs still in lib/core/constants.dart"
-  grep -n "tomatofocus.app" lib/core/constants.dart | sed 's/^/        /'
+  grep -nE "example\.com|CHANGE_ME|placeholder" lib/core/constants.dart | sed 's/^/        /'
   note "Play requires a reachable privacy policy, linked in-app AND in Console"
 else
   ok "privacy policy / support address are not placeholders"

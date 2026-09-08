@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 /// we had queued are dropped. [permissionChanges] surfaces that broadcast so
 /// the app can re-schedule the pending chain the moment access comes back.
 abstract final class ExactAlarmChannel {
-  static const _methods = MethodChannel('app.tomatofocus/exact_alarm');
-  static const _events = EventChannel('app.tomatofocus/exact_alarm_events');
+  static const _methods = MethodChannel('app.pomosauce/exact_alarm');
+  static const _events = EventChannel('app.pomosauce/exact_alarm_events');
 
   /// Emits the new "can schedule exact alarms" value whenever it changes.
   static Stream<bool> get permissionChanges {
@@ -24,7 +24,7 @@ abstract final class ExactAlarmChannel {
     return await _methods.invokeMethod<bool>('canScheduleExactAlarms') ?? true;
   }
 
-  /// Opens Settings > Apps > Tomato Focus > Alarms & reminders.
+  /// Opens Settings > Apps > Pomo Sauce > Alarms & reminders.
   static Future<void> openExactAlarmSettings() async {
     if (!Platform.isAndroid) return;
     await _methods.invokeMethod<void>('openExactAlarmSettings');

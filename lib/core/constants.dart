@@ -1,12 +1,12 @@
 abstract final class AppConstants {
-  static const appName = 'Tomato Focus';
+  static const appName = 'Pomo Sauce';
   static const appTagline = 'Focus. Rest. Repeat.';
 
   /// The live policy. This exact URL must also be entered in
   /// Play Console > App content > Privacy policy - Play checks that the app
-  /// and the listing agree. Source: github.com/Harry-Khit-Htoo/tomato-focus-privacy
+  /// and the listing agree. Source: github.com/Harry-Khit-Htoo/pomo-sauce-privacy
   static const privacyPolicyUrl =
-      'https://harry-khit-htoo.github.io/tomato-focus-privacy/';
+      'https://harry-khit-htoo.github.io/pomo-sauce-privacy/';
   static const supportEmail = 'aungkhit.pentester@gmail.com';
 
   /// Notification ids. Kept apart so cancelling one never clears another.
