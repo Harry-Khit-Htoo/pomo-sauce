@@ -95,11 +95,13 @@ updated at the same time.
 
 ## Contact
 
-Questions about this policy: **support@tomatofocus.app**
+Questions about this policy: **aungkhit.pentester@gmail.com**
 
 ---
 
-*Before publishing: host this document at the URL you enter in Play Console →
-App content → Privacy policy, and set the same URL in
-`lib/core/constants.dart` (`AppConstants.privacyPolicyUrl`) so the in-app link
-in Settings → About matches. Replace the contact address with a real one.*
+---
+
+*Published at <https://harry-khit-htoo.github.io/tomato-focus-privacy/> from
+the `tomato-focus-privacy` repository. This file is the source of truth for
+the wording; if you change it, update that repository's `index.html` and the
+Play Console Data safety declaration to match.*
